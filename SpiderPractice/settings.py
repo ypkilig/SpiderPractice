@@ -80,7 +80,7 @@ ITEM_PIPELINES = {
    'SpiderPractice.pipelines.MiLockImagsPipeline': 306,
 }
 
-IMAGES_STORE = "./request/milogcimgs"
+IMAGES_STORE = "./request/milockimg"
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
