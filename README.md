@@ -34,6 +34,6 @@ python main.py *args
 
 ```python
 # 在同一个进程中并行多个爬虫
-python main.py xinlang airleve weather 
+python main.py xinlang airlevel weather 
 ```
 
