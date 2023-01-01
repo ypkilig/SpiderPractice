@@ -34,12 +34,10 @@ class WeatherSpider(scrapy.Spider):
                 "areaInfo[areaType]":2,
                 "date[year]":year,
                 "date[month]":month,
-
             }
             params_str = urlencode(params)
             url = url_pre + "?" +params_str
-            # url = self.start_urls[0] + '?' + params_str
-            # url = f"https://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D={areaId}&areaInfo%5BareaType%5D=2&date%5Byear%5D={year}&date%5Bmonth%5D={month}"
+            
             yield scrapy.Request(
                     url=url,
                     callback=self.yearHistory_parse,

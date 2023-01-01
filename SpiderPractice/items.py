@@ -39,3 +39,13 @@ class XinLangItem(scrapy.Item):
     InchoRatio = scrapy.Field()
     PerTra = scrapy.Field()
     InPerTra = scrapy.Field()
+
+class JdBook(scrapy.Item):
+    bookName = scrapy.Field()
+    author = scrapy.Field()
+    translator = scrapy.Field()
+    publisher = scrapy.Field()
+    definePrice = scrapy.Field()
+    discount = scrapy.Field()
+    sellPrice = scrapy.Field()
+    
