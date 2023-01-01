@@ -16,7 +16,7 @@ scrapy    2.7.1
 ## 运行方式
 
 ```python
-python main.py *args
+python main.py <*args>
 ```
 
 

@@ -7,8 +7,10 @@ import scrapy
 
 
 class WeatherItem(scrapy.Item):
+    """
+    天气 Item 类 
+    """
     name = scrapy.Field()
-    time = scrapy.Field()
     date = scrapy.Field()
     Maxtempe = scrapy.Field()
     Mintempe = scrapy.Field()
@@ -17,6 +19,9 @@ class WeatherItem(scrapy.Item):
     Aqi = scrapy.Field()
 
 class AirLevelItem(scrapy.Item):
+    """
+    空气水平 Item 类
+    """
     city = scrapy.Field()
     time = scrapy.Field()
     Stations = scrapy.Field()
@@ -27,10 +32,16 @@ class AirLevelItem(scrapy.Item):
     Pripol = scrapy.Field()
 
 class MilockimgItem(scrapy.Item):
+    """
+    小米壁纸 Item 类
+    """
     title = scrapy.Field()
     src = scrapy.Field()
 
 class XinLangItem(scrapy.Item):
+    """
+    新浪财经持股 Item 类
+    """
     ID = scrapy.Field()
     name = scrapy.Field()
     count = scrapy.Field()
@@ -41,6 +52,10 @@ class XinLangItem(scrapy.Item):
     InPerTra = scrapy.Field()
 
 class JdBook(scrapy.Item):
+    """
+    京东图书日榜 Item 类
+    :param scrapy: _description_
+    """
     bookName = scrapy.Field()
     author = scrapy.Field()
     translator = scrapy.Field()

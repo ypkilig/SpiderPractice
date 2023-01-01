@@ -9,6 +9,7 @@ class WeatherSpider(scrapy.Spider):
     name = 'weather'
     allowed_domains = ['2345.com']
     start_urls = ['https://tianqi.2345.com/']
+
     def parse(self, response):
         names_all = ["北京天气", "上海天气", "深圳天气", "广州天气"]
         names =  response.xpath('//*[@id="J_cityTq"]/div/a/text()').extract()
@@ -20,7 +21,6 @@ class WeatherSpider(scrapy.Spider):
                         callback=self.weaHistory_parse,
                         meta={'name':name}
                         )
-
 
     def weaHistory_parse(self, response):
         url_pre = "https://tianqi.2345.com/Pc/GetHistory"
