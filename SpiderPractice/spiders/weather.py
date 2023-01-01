@@ -1,6 +1,7 @@
 import json
 import scrapy
 from lxml import etree
+from urllib.parse import urlencode
 from SpiderPractice.items import WeatherItem
 
 class WeatherSpider(scrapy.Spider):
@@ -22,12 +23,23 @@ class WeatherSpider(scrapy.Spider):
 
 
     def weaHistory_parse(self, response):
+        url_pre = "https://tianqi.2345.com/Pc/GetHistory"
         name = response.meta['name']
         year = 2022
         monthes = [i for i in range(1, 13)]
         areaId = response.url.split("/")[-1].split('.')[0]
         for month in monthes:
-            url = f"https://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D={areaId}&areaInfo%5BareaType%5D=2&date%5Byear%5D={year}&date%5Bmonth%5D={month}"
+            params = {
+                "areaInfo[areaId]": areaId,
+                "areaInfo[areaType]":2,
+                "date[year]":year,
+                "date[month]":month,
+
+            }
+            params_str = urlencode(params)
+            url = url_pre + "?" +params_str
+            # url = self.start_urls[0] + '?' + params_str
+            # url = f"https://tianqi.2345.com/Pc/GetHistory?areaInfo%5BareaId%5D={areaId}&areaInfo%5BareaType%5D=2&date%5Byear%5D={year}&date%5Bmonth%5D={month}"
             yield scrapy.Request(
                     url=url,
                     callback=self.yearHistory_parse,
