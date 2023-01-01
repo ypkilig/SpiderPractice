@@ -18,12 +18,10 @@ class DownPipeline(object):
         if spider.name != 'milockimg':
             req = dict(item)
             filedump = list(req.keys())
+            writer = csv.DictWriter(self.f,fieldnames=filedump)
             if self.header:  
-                writer = csv.DictWriter(self.f,fieldnames=filedump)
                 writer.writeheader()
-                self.header = False
-            else:
-                writer = csv.DictWriter(self.f, fieldnames=filedump)                
+                self.header = False             
             writer.writerow(req)
         return item
 
