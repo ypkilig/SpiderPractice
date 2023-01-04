@@ -48,6 +48,8 @@ class JdbookSpider(scrapy.Spider):
             item = JdBook()
             book = books[id]
             item['bookName'] = book.get("bookName")
+            item['author'] = None
+            item['translator'] = None
             for author in book.get("authors"):
                 if  author['type'] == '译':
                     item['translator'] = author['name']
