@@ -54,7 +54,6 @@ class XinLangItem(scrapy.Item):
 class JdBook(scrapy.Item):
     """
     京东图书日榜 Item 类
-    :param scrapy: _description_
     """
     bookName = scrapy.Field()
     author = scrapy.Field()
