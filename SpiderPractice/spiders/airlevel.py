@@ -32,7 +32,7 @@ class AirlevelSpider(scrapy.Spider):
             item["Aqi"] = td.xpath("./td[2]/text()").get()
             item["level"] = td.xpath("./td[3]/span/text()").get()
             item["Pm25"] = td.xpath("./td[4]/text()").get()
-            item["Pm10"] = td.xpath("/./td[5]/text()").get()
+            item["Pm10"] = td.xpath("./td[5]/text()").get()
             item['Pripol'] = td.xpath("./td[6]/text()").get()
             print("城市：%s, 监测站：%s"%(item["city"], item["Stations"]))
             yield item
