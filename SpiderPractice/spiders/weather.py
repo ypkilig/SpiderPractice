@@ -48,21 +48,16 @@ class WeatherSpider(scrapy.Spider):
         name = response.meta['name']
         res = json.loads(response.text)['data']
         tree = etree.HTML(res)
-        dates = tree.xpath('//table/tr/td[1]/text()')
-        Maxtempes = tree.xpath('//table/tr/td[2]/text()')
-        Mintempes = tree.xpath('//table/tr/td[3]/text()')
-        Weather = tree.xpath('//table/tr/td[4]/text()')
-        Windir = tree.xpath('//table/tr/td[5]/text()')
-        Aqi = tree.xpath('//table/tr/td//span/text()')
-        for date,Maxtempe, Mintempe, Weather, Windir, Aqi in zip(dates, Maxtempes, Mintempes, Weather, Windir, Aqi):
+        tds = tree.xpath('//table/tr[position()>1]')
+        for td in tds:
             item = WeatherItem()
             item["name"] = name
-            item["date"] = date
-            item["Maxtempe"] = Maxtempe
-            item["Mintempe"] = Mintempe
-            item["Weather"] = Weather
-            item["Windir"] = Windir
-            item["Aqi"] = Aqi
+            item["date"] = td.xpath("./td[1]/text()")
+            item["Maxtempe"] = td.xpath('./td[2]/text()')
+            item["Mintempe"] = td.xpath("./td[3]/text()")
+            item["Weather"] = td.xpath("./td[4]/text()")
+            item["Windir"] = td.xpath("./td[5]/text()")
+            item["Aqi"] = td.xpath("./td//span/text()")
             print("城市：%s, 日期：%s"%(item["name"], item["date"]))
             yield item
         

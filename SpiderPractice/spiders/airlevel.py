@@ -21,28 +21,21 @@ class AirlevelSpider(scrapy.Spider):
 
     def airlevel_parse(self, response):
         city = response.meta['city']
-        time = response.xpath("//div[1]/div[3]/div[1]/div[1]/div/span[2]/text()").extract_first()[:-2]
-        Stations = response.xpath("//table//tr/td[1]/text()").extract()
-        Aqi = response.xpath("//table//tr/td[2]/text()").extract()
-        level = response.xpath("//table//tr/td[3]/span/text()").extract()
-        Pm25 = response.xpath("//table//tr/td[4]/text()").extract()
-        Pm10 = response.xpath("//table//tr/td[5]/text()").extract()
-        Pripol = response.xpath("//table//tr/td[6]/text()").extract()
-        for i in range(len(Stations)):
+        time = response.xpath("//div[1]/div[3]/div[1]/div[1]/div/span[2]/text()").get()[:-2]
+        tds = response.xpath("//table//tr[position()>1]")
+
+        for td in tds:
             item = AirLevelItem()
             item["city"] = city
             item["time"] = time
-            item["Stations"] = Stations[i]
-            item["Aqi"] = Aqi[i]
-            item["level"] = level[i]
-            item["Pm25"] = Pm25[i]
-            item["Pm10"] = Pm10[i]
-            if i < len(Pripol):
-                item["Pripol"] = Pripol[i]
+            item["Stations"] = td.xpath("./td[1]/text()").get()
+            item["Aqi"] = td.xpath("./td[2]/text()").get()
+            item["level"] = td.xpath("./td[3]/span/text()").get()
+            item["Pm25"] = td.xpath("./td[4]/text()").get()
+            item["Pm10"] = td.xpath("/./td[5]/text()").get()
+            item['Pripol'] = td.xpath("./td[6]/text()").get()
             print("城市：%s, 监测站：%s"%(item["city"], item["Stations"]))
             yield item
-
-        #for Stations, Aqi, level, Pm25, Pm10,Pripol in zip(Stations, Aqi, level, Pm25, Pm10, Pripol):
             
 
         
