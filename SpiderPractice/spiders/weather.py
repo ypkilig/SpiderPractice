@@ -52,12 +52,12 @@ class WeatherSpider(scrapy.Spider):
         for td in tds:
             item = WeatherItem()
             item["name"] = name
-            item["date"] = td.xpath("./td[1]/text()")
-            item["Maxtempe"] = td.xpath('./td[2]/text()')
-            item["Mintempe"] = td.xpath("./td[3]/text()")
-            item["Weather"] = td.xpath("./td[4]/text()")
-            item["Windir"] = td.xpath("./td[5]/text()")
-            item["Aqi"] = td.xpath("./td//span/text()")
+            item["date"] = td.xpath("./td[1]/text()")[0]
+            item["Maxtempe"] = td.xpath('./td[2]/text()')[0]
+            item["Mintempe"] = td.xpath("./td[3]/text()")[0]
+            item["Weather"] = td.xpath("./td[4]/text()")[0]
+            item["Windir"] = td.xpath("./td[5]/text()")[0]
+            item["Aqi"] = td.xpath("./td//span/text()")[0]
             print("城市：%s, 日期：%s"%(item["name"], item["date"]))
             yield item
         
